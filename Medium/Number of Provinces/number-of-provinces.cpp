@@ -6,56 +6,140 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
+// class Disjointset{
+//     public:
+//     vector<int> parent,size;
+    
+//     Disjointset(int n){
+//         parent.resize(n+1);
+//         size.resize(n+1,1);
+//         for(int i=0;i <= n; i++){
+//             parent[i] = i;
+            
+//         }
+//     }
+    
+//     int findUPar(int n){
+//         if(n == parent[n]){
+//             return n;
+//         }
+        
+//         return parent[n] = findUPar(parent[n]);
+//     }
+    
+//     void unionBySize(int u,int v){
+//         int ulp_u = findUPar(u);
+//         int ulp_v = findUPar(v);
+        
+//         if(ulp_u == ulp_v)return;
+        
+//         if(size[ulp_u] < size[ulp_v]){
+//             parent[ulp_u] += ulp_v;
+//             size[ulp_v] += size[ulp_u];
+//         }else{
+//             parent[ulp_v] = ulp_u;
+//             size[ulp_u] += size[ulp_v];
+//         }
+//     }
+// };
+// class Solution {
+//   public:
+//     int numProvinces(vector<vector<int>> adj, int V) {
+//         // code here
+//         Disjointset ds(V);
+        
+//         for(int i=0; i< V; i++){
+//             for(int j= 0; j< V; j++){
+//                 if(adj[i][j] == 1){
+//                     ds.unionBySize(i,j);
+//                 }
+//             }
+//         }
+        
+//         int cnt = 0;
+        
+//         for(int i=0; i< V; i++){
+//             if(ds.findUPar(i)== i){
+//                 cnt++;
+//             }
+//         }
+//         return cnt;
+        
+//     }
+    
+// };
+
+class DisjointSet{
+    
+    public:
+    vector<int> rank,parent,size;
+    DisjointSet(int n){
+        rank.resize(n+1,0);
+        size.resize(n+1,1);
+        parent.resize(n+1);
+        for(int i=0;i<=n;i++){
+            parent[i]=i;
+        }
+    }
+
+    int findUPar(int node){
+        if(node==parent[node])
+        return node;
+        return parent[node]=findUPar(parent[node]);
+    }
+
+    void unionByRank(int u,int v){
+        int ulp_u=findUPar(u);
+        int ulp_v=findUPar(v);
+        if(ulp_u==ulp_v) return ; //belonging to the same component
+        if(rank[ulp_u]<rank[ulp_v]){
+            //jiska rank bada h usase attach hoga yani u will be attach to v so
+            parent[ulp_u]=ulp_v;   
+        }
+        else if(rank[ulp_v]<rank[ulp_u]){
+            parent[ulp_v]=ulp_u;
+        }
+        else{
+            parent[ulp_v]=ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    void unionBySize(int u,int v){
+        int ulp_u=findUPar(u);
+        int ulp_v=findUPar(v);
+        if(ulp_u==ulp_v) return;
+        if(size[ulp_u]<size[ulp_v]){
+            parent[ulp_u]=ulp_v;
+            size[ulp_v]+=size[ulp_v];
+        }
+        else{
+            parent[ulp_v]=ulp_u;
+            size[ulp_u]+=size[ulp_v];
+        }
+    }
+};
 class Solution {
   public:
-  void dfs(int curr_vertex,vector<bool>& vis,vector<vector<int>>& adj){
-      int n = adj.size();
-      vis[curr_vertex] = true;
-      
-      for(int i=0; i < n; i++){
-          if(i == curr_vertex)continue;
-          
-            if(!vis[i] && adj[curr_vertex][i] == 1){
-                dfs(i,vis,adj);        
-            }
-      }
-  }
-  
-  void bfs(int curr,vector<bool>& vis,vector<vector<int>>& adj){
-      queue<int> q;
-      q.push(curr);
-      vis[curr] = true;
-      
-      while(!q.empty()){
-          curr = q.front();
-          q.pop();
-          
-          for(int i=0; i < adj.size(); i++){
-              if(adj[curr][i] && !vis[i]){
-                  q.push(i);
-                  vis[i] = true;
-              }
-          }
-      }
-  }
-  
-  
     int numProvinces(vector<vector<int>> adj, int V) {
-        // code here
-        int ans =0;
-        vector<bool> vis(V,false);
-    
-        for(int i=0; i < V; i++){
-            if(!vis[i]){
-                // dfs(i,vis,adj);
-                bfs(i,vis,adj);
-                ans++;
+        DisjointSet ds(V);
+        for(int i=0;i<V;i++){
+            for(int j=0;j<V;j++){
+                if(adj[i][j]==1){
+                    ds.unionBySize(i,j);
+                }
             }
         }
-        return ans;
+        int cnt=0;
+       for(int i=0;i<V;i++){
+           if(ds.parent[i]==i)
+           cnt++;
+       }
+       return cnt;
     }
-    
 };
+
+
 
 //{ Driver Code Starts.
 
