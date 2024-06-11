@@ -1,18 +1,18 @@
-<h2><a href="https://practice.geeksforgeeks.org/problems/print-1-to-n-without-using-loops-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=print-1-to-n-without-using-loops">Print 1 To N Without Loop</a></h2><h3>Difficulty Level : School</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Print numbers from <strong>1 to N</strong> without the help of loops.</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/print-1-to-n-without-using-loops-1587115620/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=print-1-to-n-without-using-loops">Print 1 To N Without Loop</a></h2><h3>Difficulty Level : School</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Print numbers from <strong>1 to N</strong> without the help of loops.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="position: relative;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>N = 10
 <strong>Output: </strong>1 2 3 4 5 6 7 8 9 10
-</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</span></pre>
 
 <p><br>
 <span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="position: relative;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>N = 5
-<strong>Output: </strong>1 2 3 4 5</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+<strong>Output: </strong>1 2 3 4 5</span></pre>
 
 <p>&nbsp;</p>
 
