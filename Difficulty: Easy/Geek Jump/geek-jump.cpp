@@ -5,11 +5,11 @@ using namespace std;
 
 // } Driver Code Ends
 
-/*
+
 class Solution {
   public:
     
-    int solve(int curr,vector<int> height, vector<int>& dp){
+    int solve(int curr,vector<int>& height, vector<int>& dp){
         if(curr == 0)return 0;
         
         if(dp[curr] != -1)return dp[curr];
@@ -29,33 +29,43 @@ class Solution {
     int minimumEnergy(vector<int>& height, int n) {
         // Code here
         vector<int> dp(n+1,-1);
+        dp[0] =0;
         
-        return solve(n-1,height,dp);
+        for(int i=1; i< n; i++){
+            int first = dp[i-1]  + abs(height[i-1] - height[i]);
+            int second = INT_MAX;
+            if(i > 1 ){
+                second = dp[i-2] +  abs(height[i-2] - height[i]);
+            }
+            
+            dp[i] = min(first,second);
+        }
         
-    
+        return dp[n-1];
         
-    }*/
-// };
-
-class Solution {
-  public:
-    
-    int solve(vector<int>& heights, int n,vector<int>& dp){
-        if(n == 0)return 0;
         
-        if(dp[n] != -1)return dp[n];
-    
-        int oneStep = solve(heights,n-1,dp) + abs(heights[n] - heights[n-1]);
-        int twoStep = INT_MAX;
-        if(n > 1)twoStep = solve(heights,n-2,dp) + abs(heights[n] - heights[n-2]);
-        return dp[n] = min(oneStep,twoStep);
-    }
-    int minimumEnergy(vector<int>& height, int n) {
-        // Code here
-        vector<int> dp(n+1,-1);
-        return solve(height,n-1,dp);
     }
 };
+
+// class Solution {
+//   public:
+    
+//     int solve(vector<int>& heights, int n,vector<int>& dp){
+//         if(n == 0)return 0;
+        
+//         if(dp[n] != -1)return dp[n];
+    
+//         int oneStep = solve(heights,n-1,dp) + abs(heights[n] - heights[n-1]);
+//         int twoStep = INT_MAX;
+//         if(n > 1)twoStep = solve(heights,n-2,dp) + abs(heights[n] - heights[n-2]);
+//         return dp[n] = min(oneStep,twoStep);
+//     }
+//     int minimumEnergy(vector<int>& height, int n) {
+//         // Code here
+//         vector<int> dp(n+1,-1);
+//         return solve(height,n-1,dp);
+//     }
+// };
 
 //{ Driver Code Starts.
 
